@@ -1,19 +1,18 @@
-NAME = libasm
+NAME = libasm.a
 
-SRCS =	main.c 
+SRCS =	ft_strlen.s 
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:.s=.o)
 
-CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(OBJS) 
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	ar rcs $(NAME) $(OBJS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.s
+	nasm -f elf64 $(CFLAGS) $< -o $@
 
 clean:
 	rm -f $(OBJS:)
@@ -21,7 +20,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-test : init.s
-	nasm -g -felf64 init.s && ld init.o && ./a.out
+test : init.cpp
+	c++ init.cpp -L. -lasm 
 
 re: fclean all

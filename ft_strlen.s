@@ -3,12 +3,13 @@ section .text
 global ft_strlen
 
 ft_strlen:
-    xor rax, rax
+    xor eax, eax
 
 .loop:
-    cmp byte [rdi + rax], 0
+    mov cl, [rdi + rax]
+    cmp cl, 0
     je .done
-    inc rax
+    inc eax
     jmp .loop
 
 .done:

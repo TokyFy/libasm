@@ -1,7 +1,12 @@
 #include "libasm.h"
-#include <cstddef>
 #include <iostream>
 
-int main() { 
-    std::cout << ft_strlen("Hello world"); 
+int main() {
+    char src[12] = "Hello world";
+    char dst[15] = "";
+
+    ft_strcpy(dst , src);
+    std::cout << dst << std::endl;
 }
+
+

@@ -2,11 +2,10 @@
 #include <iostream>
 
 int main() {
-    char src[12] = "Hello world";
-    char dst[15] = "";
+    char src[12] = "";
+    void *ptr = ft_strdup(src);
 
-    ft_strcpy(dst , src);
-    std::cout << dst << std::endl;
+    std::cout <<  ptr << std::endl;
 }
 
 

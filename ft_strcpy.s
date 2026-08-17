@@ -4,6 +4,9 @@ global ft_strcpy
 
 ft_strcpy:
     mov rdx, rdi
+    jmp .loop
+
+.loop:
     mov al, [rsi]
     mov [rdi], al 
 
@@ -12,9 +15,9 @@ ft_strcpy:
 
     inc rsi
     inc rdi
-    jmp ft_strcpy
+    jmp .loop
 
 .done:
-    mov rax, rdi
+    mov rax, rdx
     ret
     

@@ -22,8 +22,8 @@ ft_strdup:
     push rdi
     call ft_strlen wrt ..plt
     
+    inc rax
     mov rdi, rax
-    inc rdi
     call malloc wrt ..plt
 
     cmp rax, 0
@@ -36,5 +36,6 @@ ft_strdup:
     ret
     
 .error :
+    pop rdi
     ret
     

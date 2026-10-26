@@ -1,6 +1,6 @@
 NAME = libasm.a
 
-SRCS =	ft_strlen.s ft_write.s ft_strcmp.s ft_strcpy.s ft_strdup.s 
+SRCS =	ft_strlen.s ft_write.s ft_strcmp.s ft_strcpy.s ft_strdup.s ft_read.s 
 
 OBJS = $(SRCS:.s=.o)
 
@@ -21,8 +21,8 @@ fclean: clean
 	rm -f a.out
 	rm -f $(NAME)
 
-test : init.cpp
-	c++ init.cpp -L. -lasm 
+test : main.cpp
+	c++ main.cpp -L. -lasm 
 
 s : asm.s
 	nasm -f elf64 asm.s

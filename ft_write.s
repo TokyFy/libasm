@@ -6,7 +6,7 @@
 ;    By: franaivo <franaivo@student.42antananarivo  +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2026/08/17 21:55:59 by franaivo          #+#    #+#              ;
-;    Updated: 2026/08/17 21:56:02 by franaivo         ###   ########.fr        ;
+;    Updated: 2026/10/26 09:12:33 by franaivo         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -22,7 +22,6 @@ ft_write:
     cmp rax , 0
     jl .ernno
     ret
-
 
 .ernno:
     neg rax

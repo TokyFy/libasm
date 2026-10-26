@@ -18,7 +18,7 @@ ft_strlen:
     xor eax, eax
 
 .loop:
-    mov byte [rdi + rax] , 0
+    cmp byte [rdi + rax] , 0
     je .done
     inc eax
     jmp .loop

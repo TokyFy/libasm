@@ -1,0 +1,65 @@
+LIBASM                        42 Antananarivo                        LIBASM
+
+NAME
+    libasm - mini C library written in x86-64 assembly (NASM, Intel syntax)
+
+SYNOPSIS
+    size_t  ft_strlen(const char *s);
+    ssize_t ft_write(int fd, const void *buf, size_t count);
+    ssize_t ft_read (int fd, void *buf, size_t count);
+    int     ft_strcmp(const char *s1, const char *s2);
+    char   *ft_strcpy(char *dst, const char *src);
+    char   *ft_strdup(const char *s);
+
+BUILD
+    make            build libasm.a   (nasm -f elf64 + ar rcs)
+    make test       c++ init.cpp -L. -lasm
+    make re         fclean + all
+
+FILES
+    ft_*.s          one function per file
+    libasm.h        prototypes (extern "C")
+    init.cpp        quick test main
+
+------------------------------------------------------------------------
+2. REGISTERS (64 / 32 / 16 / 8 bit)
+------------------------------------------------------------------------
+    rax  eax  ax   al       return value, syscall number
+    rbx  ebx  bx   bl       callee-saved
+    rcx  ecx  cx   cl       4th arg (clobbered by syscall)
+    rdx  edx  dx   dl       3rd arg
+    rsi  esi  si   sil      2nd arg
+    rdi  edi  di   dil      1st arg
+    rbp  rsp                frame / stack pointer
+    r8 .. r15  (r8d r8w r8b)
+
+------------------------------------------------------------------------
+3. CALLING CONVENTION (System V AMD64)
+------------------------------------------------------------------------
+    Args (in order) :   rdi  rsi  rdx  rcx  r8  r9   (then stack)
+    Return value    :   rax
+    Caller-saved    :   rax rcx rdx rsi rdi r8-r11  (may be destroyed)
+    Callee-saved    :   rbx rbp r12-r15             (push/pop if used)
+
+------------------------------------------------------------------------
+4. SYSCALLS (Linux x86-64)
+------------------------------------------------------------------------
+    rax = number   args: rdi rsi rdx r10 r8 r9   then `syscall`
+    syscall destroys rcx and r11.
+    Return: rax >= 0 ok,  rax = -errno on error (-4095..-1)
+
+    0 read    1 write    2 open    3 close    60 exit
+
+------------------------------------------------------------------------
+6. JUMPS (after cmp a, b)
+------------------------------------------------------------------------
+    jmp  label          always
+    je / jz             a == b
+    jne / jnz           a != b
+    jl  / jg            a <  b / a >  b   (signed)
+    jle / jge           a <= b / a >= b   (signed)
+    jb  / ja            a <  b / a >  b   (unsigned)
+    js                  result negative
+
+AUTHOR
+    franaivo - 42 Antananarivo
